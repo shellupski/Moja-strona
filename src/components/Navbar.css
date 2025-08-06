@@ -1,0 +1,115 @@
+/* Usun wszystko co masz i wklej to */
+
+/* Zmień tylko tę sekcję stylów .navbar */
+.navbar {
+    position: fixed;
+    top: 20px; /* Zostawiamy odstęp od góry */
+
+    /* --- ZMIANY TUTAJ --- */
+    left: 0;
+    right: 0;
+    width: auto; /* Szerokość będzie kontrolowana przez left/right i margin */
+    margin: 0 2rem; /* Dodajemy poziome marginesy zamiast ustawiać width */
+    max-width: none; /* Usuwamy ograniczenie szerokości */
+    transform: none; /* Usuwamy centrowanie transformacją */
+    /* --- KONIEC ZMIAN --- */
+
+    padding: 0.8rem 1.5rem;
+    border-radius: 50px;
+
+    background: rgba(34, 34, 34, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+}
+
+.navbar a {
+    /* Biały, ale lekko przezroczysty, aby nie "krzyczał" */
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    color: #fff; /* Pełna biel na hover */
+}
+
+/* Logo jest zawsze w pełni białe i pogrubione */
+.navbar-logo a {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #fff;
+}
+
+/* === STYLIZACJA MENU === */
+.navbar-links {
+    position: relative;
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar-links li {
+    z-index: 2; /* Linki muszą być nad pigułką */
+}
+
+/* "Pigułka" - tło na hover */
+.navbar-links::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50px;
+    z-index: 1; /* Pigułka jest pod linkami */
+
+
+    /* Jasne, półprzezroczyste tło pigułki */
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: left 0.3s ease, width 0.3s ease, opacity 0.2s ease;
+}
+
+
+/* Aktywny link (z NavLink) jest zawsze w pełni biały */
+.navbar-links a.active {
+    color: #fff;
+}
+
+/* === STYLIZACJA PRZEŁĄCZNIKA JĘZYKÓW === */
+.navbar-lang-switcher {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-lang-switcher button {
+    background: none;
+    border: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 4px 8px;
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s ease;
+}
+
+.navbar-lang-switcher button:hover {
+    color: #fff;
+}
+
+.navbar-lang-switcher button.active {
+    color: #fff;
+    font-weight: 600;
+}
+
+.navbar-lang-switcher span {
+    color: rgba(255, 255, 255, 0.2);
+    margin: 0 4px;
+}
