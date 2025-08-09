@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useRef, useState, useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
 const navItems = [
@@ -13,65 +13,82 @@ const navItems = [
 
 const Navbar = () => {
     const linksContainerRef = useRef(null);
-    const [lang, setLang] = useState('pl'); // 'pl' lub 'en'
+    const [lang, setLang] = useState('pl');
+    const location = useLocation();
 
-    const handleMouseEnter = (e) => {
-        const el = e.currentTarget;
+    const setPillToElement = (el) => {
         const container = linksContainerRef.current;
-        if (container) {
-            const { left, width } = el.getBoundingClientRect();
-            const containerRect = container.getBoundingClientRect();
-            container.style.setProperty('--pill-left', `${left - containerRect.left}px`);
-            container.style.setProperty('--pill-width', `${width}px`);
-            container.style.setProperty('--pill-opacity', '1');
-        }
+        if (!container || !el) return;
+        const containerRect = container.getBoundingClientRect();
+        const { left, width } = el.getBoundingClientRect();
+        container.style.setProperty('--pill-left', `${left - containerRect.left}px`);
+        container.style.setProperty('--pill-width', `${width}px`);
+        container.style.setProperty('--pill-opacity', '1');
     };
 
-    const handleMouseLeave = () => {
+    const setPillToActive = () => {
         const container = linksContainerRef.current;
-        if (container) {
+        if (!container) return;
+        const active = container.querySelector('a.active');
+        if (active) {
+            setPillToElement(active);
+        } else {
             container.style.setProperty('--pill-opacity', '0');
         }
     };
 
-    // Funkcja do zmiany języka
-    const handleLangChange = (newLang) => {
-        setLang(newLang);
-        // Tu w przyszłości możesz dodać obsługę tłumaczeń (np. i18next.changeLanguage)
+    const handleMouseEnter = (e) => {
+        const link = e.currentTarget.querySelector('a');
+        if (link) setPillToElement(link);
     };
 
+    const handleMouseLeave = () => setPillToActive();
+    const handleLangChange = (newLang) => setLang(newLang);
+
+    useEffect(() => {
+        setPillToActive();
+    }, [location.pathname]);
+
+    useEffect(() => {
+        const onResize = () => setPillToActive();
+        window.addEventListener('resize', onResize);
+        return () => window.removeEventListener('resize', onResize);
+    }, []);
+
     return (
-        <nav className="navbar">
-            <div className="navbar-logo">
+        <header className="main-header">
+            <div className="header-logo">
                 <NavLink to="/">Crusty IT</NavLink>
             </div>
 
-            <ul
-                className="navbar-links"
+            <nav
+                className="main-nav"
                 ref={linksContainerRef}
                 onMouseLeave={handleMouseLeave}
             >
-                {navItems.map((item) => (
-                    <li key={item.to} onMouseEnter={handleMouseEnter}>
-                        <NavLink
-                            to={item.to}
-                            className={({ isActive }) => isActive ? 'active' : ''}
-                            end={item.to === '/'}
-                        >
-                            {item.label}
-                        </NavLink>
-                    </li>
-                ))}
-            </ul>
+                <ul>
+                    {navItems.map((item) => (
+                        <li key={item.to} onMouseEnter={handleMouseEnter}>
+                            <NavLink
+                                to={item.to}
+                                className={({ isActive }) => (isActive ? 'active' : '')}
+                                end={item.to === '/'}
+                            >
+                                {item.label}
+                            </NavLink>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
 
-            <div className="navbar-lang-switcher">
+            <div className="header-lang-switcher">
                 <button
                     className={lang === 'pl' ? 'active' : ''}
                     onClick={() => handleLangChange('pl')}
                 >
                     PL
                 </button>
-                <span style={{ margin: '0 4px', color: '#aaa' }}>|</span>
+                <span>|</span>
                 <button
                     className={lang === 'en' ? 'active' : ''}
                     onClick={() => handleLangChange('en')}
@@ -79,7 +96,7 @@ const Navbar = () => {
                     EN
                 </button>
             </div>
-        </nav>
+        </header>
     );
 };
 

@@ -1,115 +1,192 @@
-/* Usun wszystko co masz i wklej to */
+:root{
+    --header-offset: 32px;
+    --header-pad-x: clamp(16px, 4vw, 48px);
 
-/* Zmień tylko tę sekcję stylów .navbar */
-.navbar {
+    /* krótszy pasek (jeszcze bardziej) */
+    --nav-width-min: 500px;
+    --nav-width-vw: 40vw;
+    --nav-width-max: 600px;
+
+    /* sensowne odstępy między linkami */
+    --nav-gap: clamp(1.5rem, 2.8vw, 2.2rem);
+    --nav-radius: 999px;
+    --nav-pad-y: 1.05rem;
+    --nav-pad-x: clamp(1.45rem, 2.4vw, 2.2rem);
+
+    --glass-bg: rgba(18, 18, 18, 0.55);
+    --glass-brd: rgba(255, 255, 255, 0.12);
+    --glass-blur: 14px;
+
+    --txt-dim: rgba(255,255,255,0.78);
+    --txt-full: #fff;
+
+    /* pigułka pod linkiem */
+    --pill-left: 0px;
+    --pill-width: 0px;
+    --pill-opacity: 0;
+    --pill-bg: rgba(255,255,255,0.08);
+}
+
+/* Header */
+.main-header {
     position: fixed;
-    top: 20px; /* Zostawiamy odstęp od góry */
-
-    /* --- ZMIANY TUTAJ --- */
+    top: var(--header-offset);
     left: 0;
     right: 0;
-    width: auto; /* Szerokość będzie kontrolowana przez left/right i margin */
-    margin: 0 2rem; /* Dodajemy poziome marginesy zamiast ustawiać width */
-    max-width: none; /* Usuwamy ograniczenie szerokości */
-    transform: none; /* Usuwamy centrowanie transformacją */
-    /* --- KONIEC ZMIAN --- */
-
-    padding: 0.8rem 1.5rem;
-    border-radius: 50px;
-
-    background: rgba(34, 34, 34, 0.45);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-
+    padding: 0 var(--header-pad-x);
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    gap: clamp(8px, 2vw, 24px);
     z-index: 1000;
+    pointer-events: none;
 }
 
-.navbar a {
-    /* Biały, ale lekko przezroczysty, aby nie "krzyczał" */
-    color: rgba(255, 255, 255, 0.8);
+.header-logo,
+.main-nav,
+.header-lang-switcher {
+    pointer-events: auto;
+}
+
+/* Logo */
+.header-logo a {
+    font-weight: 700;
+    font-size: clamp(1.25rem, 1.2vw + 1rem, 1.75rem);
+    color: var(--txt-full);
     text-decoration: none;
-    font-weight: 500;
-    transition: color 0.3s ease;
+    opacity: 0.95;
 }
 
-.navbar a:hover {
-    color: #fff; /* Pełna biel na hover */
-}
-
-/* Logo jest zawsze w pełni białe i pogrubione */
-.navbar-logo a {
-    font-weight: 600;
-    font-size: 1.25rem;
-    color: #fff;
-}
-
-/* === STYLIZACJA MENU === */
-.navbar-links {
+/* Nawigacja */
+.main-nav {
     position: relative;
     display: flex;
+    align-items: center;
+    width: clamp(var(--nav-width-min), var(--nav-width-vw), var(--nav-width-max));
+    border-radius: var(--nav-radius);
+    padding: var(--nav-pad-y) var(--nav-pad-x);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-brd);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+    box-shadow: 0 12px 30px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.main-nav::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: var(--pill-left);
+    transform: translateY(-50%);
+    width: var(--pill-width);
+    height: calc(100% - 12px);
+    border-radius: 999px;
+    background: var(--pill-bg);
+    opacity: var(--pill-opacity);
+    transition: left .24s ease, width .24s ease, opacity .2s ease;
+    z-index: 0;
+}
+
+.main-nav ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     list-style: none;
-    gap: 1.5rem;
+    gap: var(--nav-gap);
+    width: 100%;
     margin: 0;
     padding: 0;
 }
 
-.navbar-links li {
-    z-index: 2; /* Linki muszą być nad pigułką */
+.main-nav li {
+    position: relative;
+    z-index: 1;
 }
 
-/* "Pigułka" - tło na hover */
-.navbar-links::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50px;
-    z-index: 1; /* Pigułka jest pod linkami */
-
-
-    /* Jasne, półprzezroczyste tło pigułki */
-    background-color: rgba(255, 255, 255, 0.1);
-    transition: left 0.3s ease, width 0.3s ease, opacity 0.2s ease;
+.main-nav a {
+    color: var(--txt-dim);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: clamp(0.98rem, 0.35vw + 0.9rem, 1.12rem);
+    letter-spacing: 0.3px;
+    line-height: 1;
+    padding: 0.45rem 0.25rem;
+    transition: color .25s ease, transform .25s ease;
 }
 
-
-/* Aktywny link (z NavLink) jest zawsze w pełni biały */
-.navbar-links a.active {
-    color: #fff;
+.main-nav a:hover,
+.main-nav a:focus-visible,
+.main-nav a.active {
+    color: var(--txt-full);
 }
 
-/* === STYLIZACJA PRZEŁĄCZNIKA JĘZYKÓW === */
-.navbar-lang-switcher {
+/* Przełącznik języka */
+.header-lang-switcher {
     display: flex;
     align-items: center;
+    gap: 2px;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-brd);
+    border-radius: 999px;
+    padding: 0.35rem 0.5rem;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
 
-.navbar-lang-switcher button {
-    background: none;
-    border: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    cursor: pointer;
-    padding: 4px 8px;
-    color: rgba(255, 255, 255, 0.8);
-    transition: color 0.3s ease;
-}
-
-.navbar-lang-switcher button:hover {
-    color: #fff;
-}
-
-.navbar-lang-switcher button.active {
-    color: #fff;
+.header-lang-switcher button {
+    background: transparent;
+    border: 0;
     font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    padding: 6px 10px;
+    color: var(--txt-dim);
+    border-radius: 999px;
+    transition: color .2s ease, background .2s ease;
 }
 
-.navbar-lang-switcher span {
-    color: rgba(255, 255, 255, 0.2);
-    margin: 0 4px;
+.header-lang-switcher button:hover,
+.header-lang-switcher button:focus-visible {
+    color: var(--txt-full);
+    background: rgba(255,255,255,0.08);
+}
+
+.header-lang-switcher button.active {
+    color: #111;
+    background: #fff;
+}
+
+.header-lang-switcher span {
+    color: rgba(255,255,255,0.22);
+    margin: 0 2px;
+}
+
+/* padding pod fixed header */
+body { padding-top: clamp(88px, 10vh, 140px); }
+
+/* Drobne dopasowania na mniejszych ekranach */
+@media (max-width: 1200px){
+    :root{
+        --nav-width-min: 400px;
+        --nav-width-vw: 46vw;
+        --nav-width-max: 700px;
+        --nav-gap: clamp(1.3rem, 2.4vw, 2rem);
+        --nav-pad-x: clamp(1.3rem, 2.2vw, 2rem);
+    }
+}
+
+@media (max-width: 960px){
+    :root{
+        --nav-width-min: 360px;
+        --nav-width-vw: 56vw;
+        --nav-width-max: 640px;
+        --nav-gap: clamp(1rem, 2.2vw, 1.4rem);
+        --nav-pad-x: clamp(1.2rem, 2vw, 1.6rem);
+    }
+    .main-nav { padding: 0.7rem 1rem; }
+    .header-logo a { font-size: 1.25rem; }
+}
+
+@media (max-width: 640px){
+    .main-nav { display: none; }
+    .header-lang-switcher { padding: 0.3rem 0.4rem; }
 }
