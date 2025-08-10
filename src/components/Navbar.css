@@ -2,17 +2,18 @@
     --header-offset: 32px;
     --header-pad-x: clamp(16px, 4vw, 48px);
 
-    /* krótszy pasek (jeszcze bardziej) */
+    /* szerokość nawigacji */
     --nav-width-min: 500px;
     --nav-width-vw: 40vw;
     --nav-width-max: 600px;
 
-    /* sensowne odstępy między linkami */
+    /* odstępy w nawigacji */
     --nav-gap: clamp(1.5rem, 2.8vw, 2.2rem);
     --nav-radius: 999px;
     --nav-pad-y: 1.05rem;
     --nav-pad-x: clamp(1.45rem, 2.4vw, 2.2rem);
 
+    /* glass */
     --glass-bg: rgba(18, 18, 18, 0.55);
     --glass-brd: rgba(255, 255, 255, 0.12);
     --glass-blur: 14px;
@@ -26,6 +27,13 @@
     --pill-opacity: 0;
     --pill-bg: rgba(255,255,255,0.08);
 
+    /* logo chip */
+    --logo-size: 40px;        /* rozmiar samej ikony */
+    --logo-pad: 8px;          /* wewnętrzny padding tła */
+    --logo-radius: 12px;      /* zaokrąglenie tła */
+    --logo-blue-1: #63c6ff;   /* jasny akcent niebieskiego */
+    --logo-blue-2: #2aa5ff;   /* ciemniejszy akcent */
+    --logo-chip-blur: 6px;    /* delikatny blur/saturacja tła */
 }
 
 /* Header */
@@ -49,14 +57,62 @@
     pointer-events: auto;
 }
 
-/* Logo */
-.header-logo a {
-    font-weight: 700;
-    font-size: clamp(1.25rem, 1.2vw + 1rem, 1.75rem);
-    color: var(--txt-full);
+/* LOGO: delikatne niebieskie tło (chip) */
+.logo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     text-decoration: none;
-    opacity: 0.95;
+    color: var(--txt-full);
+
+    padding: var(--logo-pad);
+    border-radius: var(--logo-radius);
+
+    /* subtelny niebieski tint + lekki half‑glass vibe */
+    background:
+            radial-gradient(60% 70% at 30% 20%, color-mix(in srgb, var(--logo-blue-1) 18%, transparent), transparent 70%),
+            linear-gradient(180deg, color-mix(in srgb, var(--logo-blue-1) 10%, transparent), color-mix(in srgb, var(--logo-blue-2) 6%, transparent));
+    border: 1px solid color-mix(in srgb, var(--logo-blue-2) 26%, rgba(255,255,255,0.12));
+    backdrop-filter: saturate(120%) blur(var(--logo-chip-blur));
+    -webkit-backdrop-filter: saturate(120%) blur(var(--logo-chip-blur));
+
+    box-shadow:
+            0 12px 30px rgba(0,0,0,0.35),
+            inset 0 1px 0 rgba(255,255,255,0.07);
+    transition: transform .2s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease, opacity .2s ease;
+    will-change: transform;
+    isolation: isolate;
 }
+
+.logo-link:hover {
+    transform: translateY(-1px);
+    box-shadow:
+            0 14px 34px rgba(0,0,0,0.38),
+            inset 0 1px 0 rgba(255,255,255,0.09);
+    border-color: color-mix(in srgb, var(--logo-blue-2) 34%, rgba(255,255,255,0.12));
+}
+
+.logo-link::after {
+    /* delikatny highlight na górze chipu */
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: radial-gradient(40% 35% at 50% 0%, rgba(255,255,255,0.16), transparent 60%);
+    mix-blend-mode: screen;
+}
+
+.header-logo img {
+    width: var(--logo-size);
+    height: var(--logo-size);
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.35));
+    transition: transform .2s ease;
+}
+
+.logo-link:hover img { transform: scale(1.02); }
 
 /* Nawigacja */
 .main-nav {
@@ -184,36 +240,26 @@ body { padding-top: clamp(88px, 10vh, 140px); }
         --nav-pad-x: clamp(1.2rem, 2vw, 1.6rem);
     }
     .main-nav { padding: 0.7rem 1rem; }
-    .header-logo a { font-size: 1.25rem; }
+
+    /* odrobina kompaktowości logotypu */
+    :root { --logo-size: 36px; }
+    .logo-link { --logo-pad: 6px; }
 }
 
-@media (max-width: 640px){
-    .main-nav { display: none; }
-    .header-lang-switcher { padding: 0.3rem 0.4rem; }
-}
-
-/* Logo */
-.header-logo a {
-    display: flex; /* Zapewnia prawidłowe ułożenie obrazka */
-    align-items: center; /* Wyrównuje logo idealnie w pionie */
-    text-decoration: none;
-    transition: opacity 0.2s ease; /* Dodaje subtelny efekt przy najechaniu */
-}
-
-.header-logo a:hover {
-    opacity: 0.8; /* Lekko przygasza logo po najechaniu dla lepszego feedbacku */
-}
-
-.header-logo img {
-    height: 40px; /* Kluczowa zmiana: zrównoważony rozmiar logo */
-    width: auto;
-    display: block; /* Dobra praktyka, usuwa dodatkowe odstępy */
-    transition: height 0.3s ease; /* Płynne przejście przy zmianie rozmiaru */
-}
-
-/* Przeniesione i zintegrowane media query dla logo */
 @media (max-width: 768px) {
-    .header-logo img {
-        height: 32px; /* Zmniejszamy logo na mniejszych ekranach */
-    }
+    :root { --logo-size: 32px; }
+}
+
+/* Jeśli chcesz zachować dotychczasowe zachowanie: ukryj logo <480px */
+@media (max-width: 480px) {
+    .header-logo { display: none; }
+    .main-header { justify-content: center; }
+}
+
+/* Preferencje dostępności: mniej ruchu */
+@media (prefers-reduced-motion: reduce){
+    .logo-link,
+    .header-logo img,
+    .main-nav::before,
+    .main-nav a { transition: none !important; }
 }
