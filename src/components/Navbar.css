@@ -25,6 +25,7 @@
     --pill-width: 0px;
     --pill-opacity: 0;
     --pill-bg: rgba(255,255,255,0.08);
+
 }
 
 /* Header */
@@ -189,4 +190,30 @@ body { padding-top: clamp(88px, 10vh, 140px); }
 @media (max-width: 640px){
     .main-nav { display: none; }
     .header-lang-switcher { padding: 0.3rem 0.4rem; }
+}
+
+/* Logo */
+.header-logo a {
+    display: flex; /* Zapewnia prawidłowe ułożenie obrazka */
+    align-items: center; /* Wyrównuje logo idealnie w pionie */
+    text-decoration: none;
+    transition: opacity 0.2s ease; /* Dodaje subtelny efekt przy najechaniu */
+}
+
+.header-logo a:hover {
+    opacity: 0.8; /* Lekko przygasza logo po najechaniu dla lepszego feedbacku */
+}
+
+.header-logo img {
+    height: 40px; /* Kluczowa zmiana: zrównoważony rozmiar logo */
+    width: auto;
+    display: block; /* Dobra praktyka, usuwa dodatkowe odstępy */
+    transition: height 0.3s ease; /* Płynne przejście przy zmianie rozmiaru */
+}
+
+/* Przeniesione i zintegrowane media query dla logo */
+@media (max-width: 768px) {
+    .header-logo img {
+        height: 32px; /* Zmniejszamy logo na mniejszych ekranach */
+    }
 }

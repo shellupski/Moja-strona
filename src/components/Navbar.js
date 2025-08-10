@@ -2,6 +2,8 @@ import React, { useRef, useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
+const LOGO_URL = 'https://raw.githubusercontent.com/shellupski/Moja-strona/main/images/logo.png';
+
 const navItems = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
@@ -30,11 +32,8 @@ const Navbar = () => {
         const container = linksContainerRef.current;
         if (!container) return;
         const active = container.querySelector('a.active');
-        if (active) {
-            setPillToElement(active);
-        } else {
-            container.style.setProperty('--pill-opacity', '0');
-        }
+        if (active) setPillToElement(active);
+        else container.style.setProperty('--pill-opacity', '0');
     };
 
     const handleMouseEnter = (e) => {
@@ -45,10 +44,7 @@ const Navbar = () => {
     const handleMouseLeave = () => setPillToActive();
     const handleLangChange = (newLang) => setLang(newLang);
 
-    useEffect(() => {
-        setPillToActive();
-    }, [location.pathname]);
-
+    useEffect(() => { setPillToActive(); }, [location.pathname]);
     useEffect(() => {
         const onResize = () => setPillToActive();
         window.addEventListener('resize', onResize);
@@ -58,7 +54,16 @@ const Navbar = () => {
     return (
         <header className="main-header">
             <div className="header-logo">
-                <NavLink to="/">Crusty IT</NavLink>
+                <NavLink to="/" className="logo-link" aria-label="Crusty IT — Home">
+                    <img
+                        src={LOGO_URL}
+                        alt="Crusty IT — logo"
+                        height="40"
+                        loading="eager"
+                        decoding="async"
+                        draggable="false"
+                    />
+                </NavLink>
             </div>
 
             <nav
@@ -82,19 +87,9 @@ const Navbar = () => {
             </nav>
 
             <div className="header-lang-switcher">
-                <button
-                    className={lang === 'pl' ? 'active' : ''}
-                    onClick={() => handleLangChange('pl')}
-                >
-                    PL
-                </button>
+                <button className={lang === 'pl' ? 'active' : ''} onClick={() => handleLangChange('pl')}>PL</button>
                 <span>|</span>
-                <button
-                    className={lang === 'en' ? 'active' : ''}
-                    onClick={() => handleLangChange('en')}
-                >
-                    EN
-                </button>
+                <button className={lang === 'en' ? 'active' : ''} onClick={() => handleLangChange('en')}>EN</button>
             </div>
         </header>
     );
