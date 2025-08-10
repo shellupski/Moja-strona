@@ -1,14 +1,14 @@
 // src/components/Contact.js
 import React, { useState, useRef } from "react";
-import "./Contact.css"; // obok pliku z CSS
+import "./Contact.css"; // Upewnij się, że ten plik istnieje obok
 
 export default function Contact() {
     const formRef = useRef(null);
     const [form, setForm] = useState({ name: "", email: "", message: "" });
     const [status, setStatus] = useState({ loading: false, ok: null, text: "" });
 
-    // Wklej tu swój endpoint Formspree (zastąp poniższy)
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xovlyajk"; // <- zamień!
+    // Pamiętaj, aby użyć swojego endpointu Formspree
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xovlyajk";
 
     const handleChange = (e) =>
         setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
@@ -16,7 +16,6 @@ export default function Contact() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Prosta walidacja
         if (!form.name || !form.email || !form.message) {
             setStatus({ loading: false, ok: false, text: "Uzupełnij wszystkie pola." });
             return;
@@ -37,7 +36,6 @@ export default function Contact() {
                 setStatus({ loading: false, ok: true, text: "Dziękuję — wiadomość wysłana!" });
                 setForm({ name: "", email: "", message: "" });
             } else {
-                // Formspree zwraca informacje o błędach w JSON
                 setStatus({ loading: false, ok: false, text: data.error || "Błąd wysyłki." });
             }
         } catch (err) {
@@ -48,7 +46,14 @@ export default function Contact() {
     return (
         <section className="contact-section" id="contact">
             <div className="contact-card">
-                <h2>Formularz kontaktowy</h2>
+                {/* === ZMIANA 1: Nowy, bardziej stylowy nagłówek === */}
+                <div className="contact-header">
+                    <h2>Formularz kontaktowy</h2>
+                    <p className="contact-subtitle">
+                        Masz pytanie lub propozycję współpracy? Wypełnij formularz lub napisz do mnie bezpośrednio.
+                    </p>
+                </div>
+
                 <form ref={formRef} className="contact-form" onSubmit={handleSubmit}>
                     <label>
                         Imię
@@ -95,6 +100,16 @@ export default function Contact() {
                         {status.text}
                     </div>
                 )}
+
+                {/* === ZMIANA 2: Dodana sekcja z bezpośrednim e-mailem === */}
+                <hr className="or-divider" />
+
+                <div className="direct-email-container">
+                    <p>Lub napisz bezpośrednio na:</p>
+                    <a href="mailto:crusty.it.office@gmail.com">
+                        crusty.it.office@gmail.com
+                    </a>
+                </div>
             </div>
         </section>
     );
