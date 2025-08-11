@@ -25,6 +25,10 @@
     --pill-width: 0px;
     --pill-opacity: 0;
     --pill-bg: rgba(255, 255, 255, 0.08);
+
+    /* --- Rozmiar Logo (responsywny) --- */
+    /* Znacznie większe na desktopie, a na mniejszych ekranach płynnie się skaluje */
+    --logo-size: clamp(64px, 12vw, 144px);
 }
 
 /* === Główny Header === */
@@ -37,7 +41,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: clamp(16px, 3vw, 32px); /* Zwiększony odstęp dla lepszego oddechu */
+    gap: clamp(16px, 3vw, 32px);
     z-index: 1000;
     pointer-events: none;
 }
@@ -48,13 +52,11 @@
     pointer-events: auto;
 }
 
-/* === Logo (WERSJA FINALNA) === */
-/* Kontener jest teraz niewidoczny, służy tylko do pozycjonowania */
+/* === Logo === */
 .header-logo {
-    flex-shrink: 0; /* Zapobiega kurczeniu się logo przy małej przestrzeni */
+    flex-shrink: 0;
 }
 
-/* Link otaczający logo */
 .header-logo a {
     display: flex;
     align-items: center;
@@ -64,22 +66,16 @@
 
 .header-logo a:hover,
 .header-logo a:focus-visible {
-    transform: scale(1.06); /* Nowoczesny, subtelny efekt interakcji */
+    transform: scale(1.04);
 }
 
-/* Kluczowe style dla samego obrazka SVG */
+/* --- Logo --- */
 .header-logo img {
-    height: 42px; /* Wysokość dobrana tak, by wizualnie pasowała do paska nawigacji */
+    height: var(--logo-size); /* nadpisuje stałe wartości */
     width: auto;
     display: block;
-
-    /*
-      NAJWAŻNIEJSZA ZMIANA: `drop-shadow` zamiast `box-shadow`.
-      Rzuca cień na faktyczny kształt grafiki (sygnet i tekst),
-      a nie na jej prostokątny kontener. To jest efekt, którego szukamy.
-    */
     filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.4));
-    transition: height 0.3s ease;
+    transition: height 0.3s ease, filter 0.3s ease;
 }
 
 /* === Nawigacja === */
@@ -187,6 +183,7 @@
 }
 
 /* === Ustawienia globalne i responsywność === */
+/* Przywracamy mniejszy odstęp, żeby nie wyglądało na przesunięcie paska */
 body {
     padding-top: clamp(88px, 10vh, 140px);
 }
@@ -198,26 +195,32 @@ body {
         --nav-width-max: 700px;
         --nav-gap: clamp(1.3rem, 2.4vw, 2rem);
         --nav-pad-x: clamp(1.3rem, 2.2vw, 2rem);
+        /* Logo nieco mniejsze, ale wciąż duże */
+        --logo-size: clamp(52px, 9vw, 112px);
     }
 }
 
+/* Tablet: nadal spore, ale proporcjonalnie */
 @media (max-width: 960px) {
     :root {
-        --nav-width-min: 360px;
-        --nav-width-vw: 56vw;
-        --nav-width-max: 640px;
-        --nav-gap: clamp(1rem, 2.2vw, 1.4rem);
-        --nav-pad-x: clamp(1.2rem, 2vw, 1.6rem);
+        --logo-size: clamp(56px, 14vw, 120px);
     }
-    .main-nav { padding: 0.7rem 1rem; }
-    .header-logo img { height: 38px; } /* Zmniejszamy logo na tabletach */
 }
 
 @media (max-width: 768px) {
     .main-nav { display: none; }
+    /* Więcej miejsca wokół większego logo na mobile */
+    .main-header { gap: clamp(12px, 4vw, 20px); }
 }
 
+/* Mobile: nie ukrywamy logo — skalujemy */
 @media (max-width: 480px) {
-    .header-logo { display: none; }
-    .main-header { justify-content: center; }
+    :root {
+        --logo-size: clamp(48px, 20vw, 88px);
+    }
+
+    /* Jeśli wcześniej ukrywałeś logo lub centrujesz header, usuń/nie stosuj tych reguł:
+       .header-logo { display: none; }
+       .main-header { justify-content: center; }
+    */
 }
