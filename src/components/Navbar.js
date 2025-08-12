@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import './Navbar.css';
 
-const LOGO_URL = 'https://raw.githubusercontent.com/shellupski/Moja-strona/main/images/logo(1).svg';
+const LOGO_URL = 'https://raw.githubusercontent.com/shellupski/Moja-strona/main/images/logo_horizontaly.svg';
 
 const navItems = [
     { to: '/', label: 'Home' },
