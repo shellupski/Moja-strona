@@ -1,0 +1,391 @@
+:root{
+  --bg-1:#061626;
+  --bg-2:#0a1b33;
+  --accent-1:#00c8ff;
+  --accent-2:#7b5cff;
+  --accent:#0084ff;
+  --accent-soft: rgba(0,132,255,.18);
+  --text:#eaf2ff;
+  --muted:#9db2c8;
+  --glass: rgba(255,255,255,.06);
+  --border: rgba(255,255,255,.12);
+  --shadow: rgba(2,8,24,.55);
+}
+
+/* Plik portfolio.css */
+
+/* Importujemy zmienne kolorów z globalnego stylu, jeśli istnieją */
+/* :root { ... } */
+
+.portfolio-container {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Zmieniamy na start, aby treść nie była wyśrodkowana pionowo */
+    padding-top: 8rem; /* Dodajemy padding od góry */
+    overflow: hidden;
+    color: var(--text-color);
+    background-color: var(--background-dark);
+}
+
+.gradient-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 80% 90%, #1a1e35, #0a0e19 70%);
+    z-index: 0;
+    opacity: 0.7;
+}
+
+.content-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+/* Nagłówek sekcji */
+.portfolio-header {
+    margin-bottom: 4rem;
+    text-align: center;
+}
+
+.portfolio-title {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.portfolio-subtitle {
+    font-size: 1.2rem;
+    font-weight: 300;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    color: #a0a0a0;
+}
+
+/* Grid projektów */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    width: 100%;
+}
+
+/* Karta projektu */
+.project-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    backdrop-filter: blur(10px);
+}
+
+.project-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+}
+
+.project-image-wrapper {
+    height: 250px;
+    overflow: hidden;
+}
+
+.project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image {
+    transform: scale(1.1);
+}
+
+.project-content {
+    padding: 2rem;
+    text-align: left;
+}
+
+.project-heading {
+    font-size: 1.8rem;
+    margin: 0 0 0.5rem 0;
+    color: var(--primary-color);
+}
+
+.project-subtitle {
+    font-size: 1rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+}
+
+.project-description {
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #ccc;
+    margin-bottom: 1.5rem;
+}
+
+.project-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-badge {
+    background-color: rgba(0, 119, 182, 0.2);
+    color: var(--primary-color);
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+.project-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.project-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--secondary-color);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.project-link:hover {
+    color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+.project-link svg {
+    font-size: 1.2rem;
+}
+
+/* Animacje */
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1.5s forwards;
+}
+
+.animate-slide-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: slideUp 1.2s forwards;
+}
+
+.delay-1s { animation-delay: 0.5s; }
+.delay-2s { animation-delay: 1s; }
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
+/* Sekcja */
+.contact-section{
+  position:relative;
+  padding: clamp(64px, 8vh, 96px) 20px;
+  color: var(--text);
+  background:
+    radial-gradient(1100px 600px at 80% 20%, rgba(123,92,255,.16), transparent 55%),
+    radial-gradient(900px 520px at 15% 85%, rgba(0,200,255,.14), transparent 55%),
+    linear-gradient(160deg, var(--bg-1), var(--bg-2));
+}
+
+/* Karta formularza */
+.contact-card{
+  max-width: 880px;
+  margin: 0 auto;
+  background: var(--glass);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: clamp(18px, 3.2vw, 28px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 14px 36px var(--shadow);
+}
+
+/* Nagłówek */
+.contact-header{
+  text-align:center;
+  margin-bottom: 16px;
+}
+.contact-header h2{
+  margin: 0 0 6px;
+  font-size: clamp(26px, 4.6vw, 36px);
+  font-weight: 800;
+}
+.contact-subtitle{
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(14px, 1.6vw, 16px);
+}
+
+/* Formularz */
+.contact-form{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 14px;
+}
+
+.contact-form label{
+  display:flex;
+  flex-direction:column;
+  gap: 8px;
+  font-weight: 600;
+  color:#dbe8ff;
+}
+
+/* Pola */
+.contact-form input,
+.contact-form textarea{
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.04);
+  color: var(--text);
+  outline: none;
+  transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder{
+  color: #b7c7df;
+  opacity:.75;
+}
+
+/* Stany focus/valid/invalid */
+.contact-form input:focus,
+.contact-form textarea:focus{
+  border-color: rgba(0,200,255,.55);
+  box-shadow: 0 0 0 4px rgba(0,200,255,.14);
+  background: rgba(255,255,255,.06);
+}
+
+.contact-form input:invalid[required],
+.contact-form textarea:invalid[required]{
+  border-color: rgba(255, 85, 85, .65);
+}
+
+/* Układ: wiadomość na całą szerokość */
+.contact-form label:nth-of-type(3){ /* textarea */
+  grid-column: 1 / -1;
+}
+
+/* Przycisk */
+.contact-form button{
+  grid-column: 1 / -1;
+  justify-self: start;
+  border: 1px solid rgba(255,255,255,.08);
+  background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+  color: #081321;
+  font-weight: 800;
+  letter-spacing:.2px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .25s ease, opacity .2s ease;
+}
+.contact-form button:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(0,200,255,.22);
+}
+.contact-form button:disabled{
+  opacity:.7;
+  cursor: progress;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Komunikaty statusu */
+.form-status{
+  margin-top: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.05);
+}
+.form-status.ok{
+  color: #c9ffdf;
+  border-color: rgba(0, 205, 120, .35);
+  box-shadow: inset 0 0 0 1px rgba(0,205,120,.18);
+}
+.form-status.error{
+  color: #ffd5d5;
+  border-color: rgba(255, 80, 80, .35);
+  box-shadow: inset 0 0 0 1px rgba(255,80,80,.18);
+}
+
+/* Dzielnik "lub" */
+.or-divider{
+  margin: 18px 0;
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+}
+
+/* Sekcja bezpośredniego maila */
+.direct-email-container{
+  display:flex;
+  align-items:center;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+.direct-email-container a{
+  color:#eaf4ff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.05);
+  transition: transform .15s ease, box-shadow .25s ease, border-color .2s ease;
+}
+.direct-email-container a:hover{
+  transform: translateY(-2px);
+  border-color: rgba(0,200,255,.5);
+  box-shadow: 0 8px 22px rgba(0,200,255,.18);
+}
+
+/* Responsywność */
+@media (max-width: 780px){
+  .contact-form{
+    grid-template-columns: 1fr;
+  }
+  .contact-form button{
+    justify-self: stretch;
+    text-align:center;
+  }
+}

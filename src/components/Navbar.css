@@ -27,8 +27,8 @@
     --pill-bg: rgba(255, 255, 255, 0.08);
 
     /* --- Rozmiar Logo (responsywny) --- */
-    /* Znacznie większe na desktopie, a na mniejszych ekranach płynnie się skaluje */
-    --logo-size: clamp(64px, 12vw, 144px);
+    /* +10% względem poprzednich wartości */
+    --logo-size: clamp(70.4px, 13.2vw, 158.4px);
 }
 
 /* === Główny Header === */
@@ -195,32 +195,106 @@ body {
         --nav-width-max: 700px;
         --nav-gap: clamp(1.3rem, 2.4vw, 2rem);
         --nav-pad-x: clamp(1.3rem, 2.2vw, 2rem);
-        /* Logo nieco mniejsze, ale wciąż duże */
-        --logo-size: clamp(52px, 9vw, 112px);
+        /* +10% */
+        --logo-size: clamp(57.2px, 9.9vw, 123.2px);
     }
 }
 
 /* Tablet: nadal spore, ale proporcjonalnie */
 @media (max-width: 960px) {
     :root {
-        --logo-size: clamp(56px, 14vw, 120px);
+        /* +10% */
+        --logo-size: clamp(61.6px, 15.4vw, 132px);
     }
 }
 
+/* Wymuś wyświetlanie na małych ekranach i umożliw przewijanie poziome */
 @media (max-width: 768px) {
-    .main-nav { display: none; }
-    /* Więcej miejsca wokół większego logo na mobile */
-    .main-header { gap: clamp(12px, 4vw, 20px); }
+    .main-nav {
+        display: flex !important;          /* nadpisuje wcześniejsze display:none */
+        align-items: center;
+        justify-content: center;
+        width: min(100%, 96vw);
+        padding: 0.55rem var(--nav-pad-x);
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+    }
+
+    .main-nav ul {
+        display: flex;
+        flex-wrap: nowrap;                  /* jeden wiersz */
+        gap: var(--nav-gap);
+        width: max-content;                 /* pozwala przewijać, gdy się nie mieści */
+    }
+
+    .main-nav li { flex: 0 0 auto; }
+
+    .main-nav a {
+        font-size: clamp(0.86rem, 3.2vw, 0.98rem);
+        letter-spacing: 0.2px;
+        padding: 0.35rem 0.18rem;
+    }
+
+    .main-header {
+        gap: clamp(8px, 3vw, 16px);
+    }
+}
+
+/* Dodatkowe zagęszczenie na bardzo małych ekranach */
+@media (max-width: 480px) {
+    .main-nav {
+        width: 94vw;
+        padding: 0.5rem var(--nav-pad-x);
+    }
 }
 
 /* Mobile: nie ukrywamy logo — skalujemy */
 @media (max-width: 480px) {
     :root {
-        --logo-size: clamp(48px, 20vw, 88px);
+        /* +10% */
+        --logo-size: clamp(52.8px, 22vw, 96.8px);
+        --nav-gap: clamp(0.45rem, 2.2vw, 0.75rem);
+        --nav-pad-x: clamp(0.5rem, 2.8vw, 0.9rem);
     }
 
-    /* Jeśli wcześniej ukrywałeś logo lub centrujesz header, usuń/nie stosuj tych reguł:
-       .header-logo { display: none; }
-       .main-header { justify-content: center; }
-    */
+    .main-header {
+        gap: clamp(8px, 3vw, 16px);
+    }
+
+    .main-nav {
+        width: min(100%, 96vw);
+        padding: 0.55rem var(--nav-pad-x);
+        overflow-x: auto;              /* przewijanie w poziomie, gdy potrzeba */
+        -webkit-overflow-scrolling: touch; /* płynne na iOS */
+        scrollbar-width: thin;
+    }
+
+    .main-nav ul {
+        flex-wrap: nowrap; /* trzymamy w jednym wierszu */
+    }
+
+    .main-nav a {
+        font-size: clamp(0.9rem, 3.2vw, 1rem);
+        padding: 0.4rem 0.2rem;
+    }
+}
+
+/* Dodatkowe doszlifowanie na bardzo małych ekranach */
+@media (max-width: 480px) {
+    :root {
+        --nav-gap: clamp(0.45rem, 2.2vw, 0.75rem);
+        --nav-pad-x: clamp(0.5rem, 2.8vw, 0.9rem);
+    }
+
+    .main-nav {
+        width: 94vw;
+        padding: 0.5rem var(--nav-pad-x);
+    }
+
+    .main-nav a {
+        font-size: clamp(0.84rem, 3.4vw, 0.95rem);
+        letter-spacing: 0.2px;
+        padding: 0.35rem 0.18rem;
+    }
 }
