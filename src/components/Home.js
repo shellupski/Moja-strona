@@ -74,6 +74,38 @@ export default function Home() {
         if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     };
 
+    // Adresy do CV w repo (RAW + CDN fallback)
+    const GITHUB_CV_RAW = 'https://raw.githubusercontent.com/shellupski/Moja-strona/main/public/cv/CV.pdf';
+    const GITHUB_CV_CDN = 'https://cdn.jsdelivr.net/gh/shellupski/Moja-strona@main/public/cv/CV.pdf';
+
+    // Wymuszone pobieranie CV (fetch -> blob -> download), z fallbackami
+    const downloadCV = async (e) => {
+        e.preventDefault();
+        const tryDownload = async (url) => {
+            const res = await fetch(url, { mode: 'cors', cache: 'no-store' });
+            if (!res.ok) throw new Error(`HTTP ${res.status}`);
+            const blob = await res.blob();
+            const objUrl = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = objUrl;
+            a.download = 'CV.pdf';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(objUrl);
+        };
+
+        try {
+            await tryDownload(GITHUB_CV_RAW);         // 1) RAW GitHub
+        } catch (_) {
+            try {
+                await tryDownload(GITHUB_CV_CDN);     // 2) jsDelivr CDN fallback
+            } catch {
+                window.open(GITHUB_CV_RAW, '_blank', 'noopener,noreferrer'); // 3) otwórz w nowej karcie
+            }
+        }
+    };
+
     return (
         <section id="home" className="home">
             {/* Decorative background */}
@@ -116,8 +148,9 @@ export default function Home() {
                         <a
                             className="btn-glass"
                             onMouseMove={handleMagnet}
-                            href={`${process.env.PUBLIC_URL}/cv/CV.pdf`}
-                            download
+                            href={GITHUB_CV_RAW}        // bezpośredni adres (działa też jako fallback)
+                            onClick={downloadCV}        // wymuszenie pobrania przez blob
+                            target="_blank"
                             rel="noopener noreferrer"
                         >
                             📄 Pobierz CV
