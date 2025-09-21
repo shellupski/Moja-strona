@@ -5,7 +5,7 @@
     align-items: center;
     justify-content: center;
     padding: 50px 20px;
-    background: radial-gradient(circle at 80% 30%, #0d2b4a 0%, #071224 40%, #02060a 100%);
+    background: transparent; /* było: radial-gradient(circle at 80% 30%, #0d2b4a 0%, #071224 40%, #02060a 100%) */
     color: #fff;
     font-family: "Inter", system-ui, sans-serif;
 }

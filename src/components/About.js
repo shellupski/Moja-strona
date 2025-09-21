@@ -1,5 +1,6 @@
 // src/pages/about/about.js
 import React from "react";
+import { HashLink } from "react-router-hash-link";
 import "./About.css";
 import {
     FaMapMarkerAlt,
@@ -68,19 +69,19 @@ const About = () => {
                         </ul>
 
                         <div className="about__actions">
-                            <a href="#experience" className="btn btn--primary">
+                            <HashLink smooth to="/experience#experience" className="btn btn--primary">
                                 Zobacz doświadczenie
-                            </a>
-                            <a href="#contact" className="btn btn--outline">
+                            </HashLink>
+                            <HashLink smooth to="/contact#contact" className="btn btn--outline">
                                 Skontaktuj się
-                            </a>
+                            </HashLink>
                         </div>
 
                         <div className="about__social">
-                            <a href="mailto:skorupski-tomasz@wp.pl" aria-label="E-mail">
+                            <a href="mailto:skorupski-tomasz@wp.pl" aria-label="E-mail" target="_blank" rel="noopener noreferrer">
                                 <FaEnvelope />
                             </a>
-                            <a href="https://github.com/shellupski" aria-label="GitHub">
+                            <a href="https://github.com/shellupski" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
                                 <FaGithub />
                             </a>
                             <a
@@ -122,19 +123,7 @@ const About = () => {
                                 <p>PHP Developer (Strefa Kursów, 2025), GitHub Copilot (Coders Lab, 2025)</p>
                             </div>
                         </div>
-
-                        <div className="about__divider"></div>
-
-                        <div className="about__mini">
-                            <h4>Wybrane projekty</h4>
-                            <ul>
-                                <li>CMS do Kampanii Influencerskich – poprawki, UX/UI, stabilność (PHP, MySQL, JS, Jira)</li>
-                                <li>Mobile Cookbook (PWA) – React + Firebase, offline, responsywność</li>
-                            </ul>
-                            <a href="#portfolio" className="about__link">
-                                Pełne portfolio →
-                            </a>
-                        </div>
+                        {/* usunięto: about__divider + blok "Wybrane projekty" */}
                     </aside>
                 </div>
 

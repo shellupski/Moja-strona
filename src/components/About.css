@@ -14,7 +14,8 @@
     position: relative;
     padding: 6rem 1.5rem;
     color: var(--text-main);
-    background: radial-gradient(1200px 800px at 15% 20%, #091a3a, #050f24 60%);
+    background: transparent !important; /* było: radial-gradient(...) */
+    background-image: none !important;
     overflow: hidden;
 }
 
@@ -50,6 +51,7 @@
     display: grid;
     grid-template-columns: 1.2fr .9fr;
     gap: 2rem;
+    align-items: start;           /* NOWE: nie rozciągaj kolumn na pełną wysokość */
 }
 
 .about__text p {
@@ -134,11 +136,16 @@
     background: var(--glass);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 16px;
-    padding: 1.2rem 1.2rem 1rem;
+    padding: 1rem 1rem 0.9rem;    /* nieco ciaśniej */
     backdrop-filter: blur(10px);
     box-shadow: 0 10px 35px rgba(0,0,0,0.25);
     position: relative;
     overflow: hidden;
+
+    align-self: start;            /* NOWE: wysokość tylko wg zawartości */
+    justify-self: end;            /* trzymaj kartę przy prawej krawędzi */
+    width: fit-content;           /* dopasuj szerokość do treści */
+    max-width: 380px;             /* górny limit, żeby nie była zbyt szeroka */
 }
 
 .about__card::before {
@@ -241,9 +248,10 @@
     position: absolute;
     border-radius: 50%;
     filter: blur(70px);
-    opacity: 0.45;
+    opacity: 0.0;              /* całkowicie wyłączamy bloby, żeby nie brudziły tła */
     z-index: 0;
     animation: drift 14s ease-in-out infinite;
+    pointer-events: none;
 }
 
 .about__blob--a {
@@ -268,11 +276,15 @@
     50%      { transform: translate(28px,18px); }
 }
 
-/* Animacje wejścia */
-.animate-fade-in { opacity: 0; animation: fadeIn .9s forwards; }
-.animate-slide-up { opacity: 0; transform: translateY(16px); animation: slideUp .9s forwards; }
-.delay-1s { animation-delay: .8s; }
-.delay-2s { animation-delay: 1.2s; }
+@media (min-width: 1024px) {
+  /* Jeśli chcesz mieć delikatne akcenty na dużych ekranach — włącz minimalnie */
+  .about__blob {
+      opacity: 0.12; /* bardzo subtelne, nie psuje przejść */
+      /* wygaszamy krawędzie blobów, by nie robiły „plam” na granicach sekcji */
+      -webkit-mask-image: radial-gradient(60% 60% at 50% 50%, #000 65%, transparent 100%);
+      mask-image: radial-gradient(60% 60% at 50% 50%, #000 65%, transparent 100%);
+  }
+}
 
 @keyframes fadeIn { to { opacity: 1; } }
 @keyframes slideUp { to { opacity: 1; transform: translateY(0); } }
@@ -280,5 +292,10 @@
 /* Responsywność */
 @media (max-width: 900px) {
     .about__grid { grid-template-columns: 1fr; }
-    .about__card { order: -1; }
+    .about__card {
+        order: -1;
+        width: 100%;              /* na mobile pełna szerokość */
+        max-width: 100%;
+        justify-self: stretch;
+    }
 }
