@@ -10,8 +10,8 @@ const projects = [
     {
         id: 1,
         title: 'Mobilna Książka Kucharska (PWA)',
-        subtitle: 'Progresywna Aplikacja Webowa',
-        description: 'Opracowałem progresywną aplikację webową (PWA), która pomaga w planowaniu posiłków na podstawie składników dostępnych w kuchni. Integruje bazę przepisów, instrukcje przygotowania i czasy gotowania dodatków, a wbudowany timer z powiadomieniem dźwiękowym ułatwia kontrolę procesu. Aplikacja jest projektowana mobile‑first i działa również w trybie offline, pozostając dostępna na każdym urządzeniu z przeglądarką. Dzięki temu realnie skraca czas spędzany na gotowaniu i ułatwia podejmowanie decyzji „co ugotować”. Projekt zrealizowany w oparciu o React z naciskiem na wydajność i wygodę użytkownika.',
+        subtitle: 'Progresywna Aplikacja Webowa — projekt dyplomowy',
+        description: 'Opracowałem progresywną aplikację webową (PWA), która pomaga w planowaniu posiłków na podstawie składników dostępnych w kuchni. Integruje bazę przepisów, instrukcje przygotowania i czasy gotowania dodatków, a wbudowany timer z powiadomieniem dźwiękowym ułatwia kontrolę procesu. Aplikacja została zaprojektowana w podejściu mobile‑first i działa również w trybie offline, pozostając dostępna na każdym urządzeniu z przeglądarką. Dzięki temu realnie skraca czas spędzany na gotowaniu i ułatwia podejmowanie decyzji „co ugotować”. Projekt zrealizowany w oparciu o React z naciskiem na wydajność i wygodę użytkownika. Powstał jako element pracy dyplomowej.',
         technologies: ['React', 'Firebase', 'PWA'],
         demoLink: 'https://mobilnaksiazkakucharska.netlify.app',
         githubLink: 'https://github.com/shellupski/Mobilna-ksiazka-kucharska', // zaktualizowany link do repo

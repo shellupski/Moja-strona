@@ -116,9 +116,9 @@ export default function Home() {
                         <a
                             className="btn-glass"
                             onMouseMove={handleMagnet}
-                            href={CV_FILE}
-                            target="_blank"
-                            rel="noreferrer"
+                            href="/cv/CV.pdf"
+                            download
+                            rel="noopener noreferrer"
                         >
                             📄 Pobierz CV
                         </a>
