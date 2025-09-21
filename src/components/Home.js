@@ -116,7 +116,7 @@ export default function Home() {
                         <a
                             className="btn-glass"
                             onMouseMove={handleMagnet}
-                            href="/cv/CV.pdf"
+                            href={`${process.env.PUBLIC_URL}/cv/CV.pdf`}
                             download
                             rel="noopener noreferrer"
                         >
