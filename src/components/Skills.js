@@ -66,7 +66,7 @@ const GROUPS = [
         key: "db",
         label: "Bazy danych",
         items: [
-            { name: "MySQL", level: "Zaawansowany", Icon: SiMysql, notes: "administracja, optymalizacja, kopie" },
+            { name: "MySQL", level: "Średniozaawansowany", Icon: SiMysql, notes: "administracja, optymalizacja, kopie" },
             { name: "PostgreSQL", level: "Podstawy", Icon: SiPostgresql },
             { name: "SQL (zapytania, optymalizacja)", level: "Średniozaawansowany", Icon: FaDatabase }
         ]
@@ -102,7 +102,8 @@ const GROUPS = [
         label: "Narzędzia i praktyki",
         items: [
             { name: "Jira", level: "Zaawansowany", Icon: SiJira },
-            { name: "GitLab", level: "Zaawansowany", Icon: SiGitlab },
+            { name: "GitLab", level: "Podstawy", Icon: SiGitlab },
+            { name: "GitHub", level: "Średniozaawansowany", Icon: SiGit },
             { name: "Bezpieczeństwo i dobre praktyki", level: "Średniozaawansowany", Icon: FaTools }
         ]
     },

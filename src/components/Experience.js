@@ -152,7 +152,25 @@ const Experience = () => {
                             </div>
                         </div>
                     </li>
-
+                    <li className="exp__item">
+                        <div className="exp__pin" aria-hidden="true" />
+                        <div className="exp__card">
+                            <div className="exp__top">
+                                <div className="exp__where">
+                                    <FaBuilding /> WASKO S.A. • Technik mobilny
+                                </div>
+                                <div className="exp__meta">
+                                    <span className="exp__meta-item"><FaCalendarAlt /> 06.2020 – 09.2020</span>
+                                    <span className="exp__meta-item"><FaMapMarkerAlt /> Szczecin</span>
+                                </div>
+                            </div>
+                            <ul className="exp__bullets">
+                                <li>Serwis i konfiguracja urządzeń drukujących oraz wsparcie sprzętu użytkowników w oddziałach banków.</li>
+                                <li>Diagnoza problemów na miejscu u klienta i przywracanie ciągłości pracy.</li>
+                                <li>Przygotowanie, konfiguracja i uruchamianie nowego sprzętu w terenie.</li>
+                            </ul>
+                        </div>
+                    </li>
                     {/* EOT */}
                     <li className="exp__item">
                         <div className="exp__pin" aria-hidden="true" />
@@ -163,11 +181,13 @@ const Experience = () => {
                                 </div>
                                 <div className="exp__meta">
                                     <span className="exp__meta-item"><FaCalendarAlt /> 09.2018 – 03.2019</span>
-                                    <span className="exp__meta-item"><FaMapMarkerAlt /> Służba zdrowia i pomoc medyczna</span>
+                                    <span className="exp__meta-item"><FaMapMarkerAlt /> Szczecin</span>
                                 </div>
                             </div>
                             <ul className="exp__bullets">
-                                <li>Zdalne rozwiązywanie problemów informatycznych użytkowników końcowych.</li>
+                                <li>Zdalne wsparcie IT dla szpitali i zespołów ratownictwa medycznego.</li>
+                                <li>Obsługa zgłoszeń: diagnostyka, rozwiązywanie incydentów, eskalacje.</li>
+                                <li>Konfiguracje i zmiany: stacje robocze, aplikacje medyczne, uprawnienia.</li>
                             </ul>
                         </div>
                     </li>
