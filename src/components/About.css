@@ -89,6 +89,47 @@
     margin: 1.2rem 0 1rem;
 }
 
+/* Usunięcie podkreślenia w linkach-przyciskach tylko w sekcji About */
+.about__actions .btn,
+.about__actions .btn:link,
+.about__actions .btn:visited,
+.about__actions .btn:hover,
+.about__actions .btn:focus,
+.about__actions .btn:active {
+  text-decoration: none;
+}
+
+/* (Reszta z poprzedniej zmiany pozostaje bez zmian) */
+.about__actions .btn {
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-weight: 600;
+}
+
+/* Wariant A: oba wypełnione, drugi lekko ciemniejszy – spójne i proste */
+.about__actions .btn--primary {
+  background: #2f80ff;            /* akcent */
+  color: #fff;
+  border: none;
+}
+.about__actions .btn--primary:hover { background: #1f6af0; }
+
+.about__actions .btn--outline {
+  background: #274b8f;            /* ten sam odcień, stonowany */
+  color: #fff;
+  border: none;
+}
+.about__actions .btn--outline:hover { background: #213f79; }
+
+/* Odstęp między przyciskami */
+.about__actions .btn + .btn { margin-left: 12px; }
+
+/* Fokus (dostępność) */
+.about__actions .btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(47,128,255,.35);
+}
+
 .btn {
     padding: 0.8rem 1.6rem;
     border-radius: 50px;

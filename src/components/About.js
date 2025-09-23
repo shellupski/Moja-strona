@@ -56,10 +56,10 @@ const About = () => {
                             <strong>DevOps</strong> (<strong>Git, Docker, CI/CD</strong>).
                         </p>
                         <p>
-                            Obecnie działam w <strong>Streetcom</strong> jako Administrator
-                            Systemów IT & Developer Platform – odpowiadam za wsparcie,
-                            stabilność środowiska, modernizacje i usprawnienia. Rozwijam się
-                            w kierunku roli <strong>Junior DevOps Engineer / Cloud SysAdmin</strong>.
+                            Obecnie jestem po pierwszym od dawna dłuższym urlopie i aktywnie poszukuję pracy zgodnej z moimi umiejętnościami i dotychczasowym doświadczeniem. Moją intencją jest rozwój w kierunku roli <strong>Junior DevOps Engineer / Cloud SysAdmin</strong>. Równolegle tworzę autorską aplikację, rozwijając praktyczne kompetencje w zakresie automatyzacji, konteneryzacji i dobrych praktyk CI/CD.
+                        </p>
+                        <p>
+                            Wcześniej odpowiadałem za wsparcie, stabilność środowiska, modernizacje i usprawnienia jako Administrator IT & Developer Platform w Streetcom.
                         </p>
 
                         <ul className="about__bullets">
@@ -105,8 +105,8 @@ const About = () => {
                         <div className="about__fact">
                             <FaBriefcase />
                             <div>
-                                <h4>Aktualna rola</h4>
-                                <p>Administrator IT & Developer Platform – Streetcom</p>
+                                <h4>Status zawodowy</h4>
+                                <p>Aktywnie poszukuję roli Junior DevOps / Cloud SysAdmin</p>
                             </div>
                         </div>
                         <div className="about__fact">

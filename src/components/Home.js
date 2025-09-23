@@ -128,12 +128,7 @@ export default function Home() {
                     </h2>
 
                     <p className="hero__lead">
-                        Pomagam firmom działać niezawodnie. Łączę administrację systemami
-                        Windows i Linux, sieci oraz bazy danych z praktykami DevOps
-                        (Docker, Git, CI/CD) i tworzeniem rozwiązań webowych. Modernizuję,
-                        automatyzuję i dbam o bezpieczeństwo oraz ciągłość działania.
-                        Obecnie rozwijam kompetencje DevOps i buduję aplikacje React/PWA.
-                    </p>
+                        Jestem specjalistą IT z szerokim przekrojem doświadczeń: administracja Windows/AD i Linux, sieci oraz bazy danych — sprawnie łączę różne technologie w praktyczne rozwiązania. Pracowałem przy modernizacji infrastruktury i usprawnianiu procesów, dbając o stabilność systemów i komfort użytkowników. Uczciwie: nie mam jeszcze komercyjnego doświadczenia DevOps; intensywnie się tego uczę i rozwijam własny projekt (Git, Docker, podstawowe pipeline’y CI/CD). Moje mocne strony to szybkie odnajdywanie się w nowych narzędziach, komunikacja, dokumentacja i ciągła chęć nauki. Jestem otwarty na zdalne role — nie tylko w obszarze DevOps, ale również w administracji/systemach i pokrewnych. Szukam miejsca, w którym będę mógł wnosić wartość od pierwszego dnia i równolegle rozwijać kompetencje chmurowe i automatyzacyjne.                    </p>
 
                     <div className="hero__cta">
                         <HashLink
