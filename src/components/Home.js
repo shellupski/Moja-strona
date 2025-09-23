@@ -1,11 +1,10 @@
 // src/sections/home.js
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
 import { HashLink } from 'react-router-hash-link';
 
 // Opcjonalnie podmień ścieżkę do avatara/CV w /public
 const AVATAR = "https://raw.githubusercontent.com/shellupski/Moja-strona/main/images/logo_vertical.svg"; // jeśli nie masz zdjęcia, zostaw pusty string
-const CV_FILE = "/Tomasz_Skorupski_CV.pdf";
 
 const ROLES = [
     "Specjalista IT",
