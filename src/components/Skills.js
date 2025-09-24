@@ -148,7 +148,7 @@ const Skills = () => {
       <div className="skills__container">
         <header className="skills__header">
           <h2 className="skills__title">
-            {t("skills.title")} <span>/ {isEN ? "Skills" : "Skills"}</span>
+            {t("skills.title")}
           </h2>
           <p className="skills__kicker">{t("skills.kicker")}</p>
 
