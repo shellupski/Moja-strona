@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Moja-strona/static/css/main.af1ba6eb.css",
-    "main.js": "/Moja-strona/static/js/main.b574b06f.js",
-    "static/js/453.cd7cebbc.chunk.js": "/Moja-strona/static/js/453.cd7cebbc.chunk.js",
-    "static/media/one_page_animals.jpg": "/Moja-strona/static/media/one_page_animals.96fe3262e60ceb83ff59.jpg",
-    "static/media/mobile_cook.jpg": "/Moja-strona/static/media/mobile_cook.b5d62ccc2c1b79a9af0a.jpg",
-    "index.html": "/Moja-strona/index.html",
-    "main.af1ba6eb.css.map": "/Moja-strona/static/css/main.af1ba6eb.css.map",
-    "main.b574b06f.js.map": "/Moja-strona/static/js/main.b574b06f.js.map",
-    "453.cd7cebbc.chunk.js.map": "/Moja-strona/static/js/453.cd7cebbc.chunk.js.map"
+    "main.css": "/Crusty-IT/static/css/main.af1ba6eb.css",
+    "main.js": "/Crusty-IT/static/js/main.893d88ba.js",
+    "static/js/453.653218cb.chunk.js": "/Crusty-IT/static/js/453.653218cb.chunk.js",
+    "static/media/one_page_animals.jpg": "/Crusty-IT/static/media/one_page_animals.96fe3262e60ceb83ff59.jpg",
+    "static/media/mobile_cook.jpg": "/Crusty-IT/static/media/mobile_cook.b5d62ccc2c1b79a9af0a.jpg",
+    "index.html": "/Crusty-IT/index.html",
+    "main.af1ba6eb.css.map": "/Crusty-IT/static/css/main.af1ba6eb.css.map",
+    "main.893d88ba.js.map": "/Crusty-IT/static/js/main.893d88ba.js.map",
+    "453.653218cb.chunk.js.map": "/Crusty-IT/static/js/453.653218cb.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.af1ba6eb.css",
-    "static/js/main.b574b06f.js"
+    "static/js/main.893d88ba.js"
   ]
 }
