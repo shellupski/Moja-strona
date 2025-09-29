@@ -183,7 +183,7 @@ const Skills = () => {
                 <h3 className="sk-group__title">{group.label}</h3>
                 <div className="sk-grid">
                   {group.items.map((s) => (
-                    <SkillItem key={s.id} {...s} />
+                    <SkillItem key={`${group.key}:${s.id ?? s.name ?? (s.Icon?.name || 'item')}`} {...s} />
                   ))}
                 </div>
               </section>
@@ -196,7 +196,7 @@ const Skills = () => {
                   <h3 className="sk-group__title">{group.label}</h3>
                   <div className="sk-grid">
                     {group.items.map((s) => (
-                      <SkillItem key={s.id} {...s} />
+                      <SkillItem key={`${group.key}:${s.id ?? s.name ?? (s.Icon?.name || 'item')}`} {...s} />
                     ))}
                   </div>
                 </section>
