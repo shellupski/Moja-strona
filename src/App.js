@@ -16,7 +16,7 @@ import './App.css';
 
 function App() {
     return (
-        <Router basename="/Moja-strona">
+        <Router basename="/Crusty-IT">
             <Navbar />
 
             {/* Dodajemy główny kontener na treść strony */}
