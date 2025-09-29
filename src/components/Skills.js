@@ -37,11 +37,11 @@ const Skills = () => {
   const { t, i18n } = useTranslation();
   const isEN = i18n.language?.startsWith("en");
 
-  const LEVELS = isEN
+  const LEVELS = useMemo(() => isEN
     ? { Advanced: 80, Intermediate: 65, Basics: 45 }
-    : { Zaawansowany: 80, "Średniozaawansowany": 65, Podstawy: 45 };
+    : { Zaawansowany: 80, "Średniozaawansowany": 65, Podstawy: 45 }, [isEN]);
 
-  const GROUPS = [
+  const GROUPS = useMemo(() => [
     {
       key: "systems",
       label: t("skills.groups.systems"),
@@ -49,7 +49,7 @@ const Skills = () => {
         { name: t("skills.items.win.name"), level: t("skills.items.win.level"), Icon: FaWindows, notes: t("skills.items.win.notes") },
         { name: t("skills.items.linux.name"), level: t("skills.items.linux.level"), Icon: FaLinux, notes: t("skills.items.linux.notes") },
         { name: t("skills.items.scripts.name"), level: t("skills.items.scripts.level"), Icon: FaTerminal },
-        { name: t("skills.items.hardening.name"), level: t("skills.items.hardening.level"), Icon: FaTools }
+        { id: "hardening", name: t("skills.items.hardening.name"), level: t("skills.items.hardening.level"), Icon: FaTools }
       ]
     },
     {
@@ -111,10 +111,10 @@ const Skills = () => {
       items: [
         { name: t("skills.items.problemSolving.name"), level: t("skills.items.problemSolving.level"), Icon: FaLightbulb },
         { name: t("skills.items.communication.name"), level: t("skills.items.communication.level"), Icon: FaComments },
-        { name: t("skills.items.teamwork.name"), level: t("skills.items.teamwork.level"), Icon: FaUsers }
+        { id: "teamwork", name: t("skills.items.teamwork.name"), level: t("skills.items.teamwork.level"), Icon: FaUsers }
       ]
     }
-  ];
+  ], [t]);
 
   const SkillItem = ({ name, level, Icon, twinIcon: Twin, suffixIcons }) => {
     const value = LEVELS[level] || 50;
@@ -177,16 +177,31 @@ const Skills = () => {
           </div>
         </header>
 
-        {items.map((group) => (
-          <section key={group.key} className="sk-group">
-            {active === "all" && <h3 className="sk-group__title">{group.label}</h3>}
-            <div className="sk-grid">
-              {group.items.map((s) => (
-                <SkillItem key={s.name} {...s} />
-              ))}
-            </div>
-          </section>
-        ))}
+        {active === 'all'
+          ? GROUPS.map((group) => (
+              <section key={group.key} className="sk-group">
+                <h3 className="sk-group__title">{group.label}</h3>
+                <div className="sk-grid">
+                  {group.items.map((s) => (
+                    <SkillItem key={s.id} {...s} />
+                  ))}
+                </div>
+              </section>
+            ))
+          : (() => {
+              const group = GROUPS.find((g) => g.key === active);
+              if (!group) return null;
+              return (
+                <section className="sk-group">
+                  <h3 className="sk-group__title">{group.label}</h3>
+                  <div className="sk-grid">
+                    {group.items.map((s) => (
+                      <SkillItem key={s.id} {...s} />
+                    ))}
+                  </div>
+                </section>
+              );
+            })()}
       </div>
     </section>
   );
