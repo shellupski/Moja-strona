@@ -1,14 +1,23 @@
-import React from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import './Portfolio.css';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 import cookbookThumbnail from './assets/mobile_cook.jpg';
 import animalsThumbnail from './assets/one_page_animals.jpg';
 import { useTranslation, Trans } from 'react-i18next';
 
+// ... existing code ...
 const Portfolio = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [activeFilter, setActiveFilter] = useState('all');
+  const [isLoading, setIsLoading] = useState(true);
 
-  const projects = [
+  // symulacja krótkiego ładowania, aby pokazać skeletony (możesz usunąć useEffect, jeśli niepotrzebne)
+  useEffect(() => {
+    const tm = setTimeout(() => setIsLoading(false), 350);
+    return () => clearTimeout(tm);
+  }, []);
+
+  const projects = useMemo(() => ([
     {
       id: "pwaCookbook",
       image: cookbookThumbnail,
@@ -17,7 +26,10 @@ const Portfolio = () => {
       title: t('portfolio.projects.pwaCookbook.title'),
       subtitle: t('portfolio.projects.pwaCookbook.subtitle'),
       description: t('portfolio.projects.pwaCookbook.description'),
-      technologies: t('portfolio.projects.pwaCookbook.tech', { returnObjects: true })
+      technologies: t('portfolio.projects.pwaCookbook.tech', { returnObjects: true }),
+      role: t('portfolio.projects.pwaCookbook.role', { defaultValue: 'Developer' }),
+      year: '2024',
+      caseStudyLink: t('portfolio.projects.pwaCookbook.case', { defaultValue: '' }) || null,
     },
     {
       id: "animalsOnePage",
@@ -27,13 +39,27 @@ const Portfolio = () => {
       title: t('portfolio.projects.animalsOnePage.title'),
       subtitle: t('portfolio.projects.animalsOnePage.subtitle'),
       description: t('portfolio.projects.animalsOnePage.description'),
-      technologies: t('portfolio.projects.animalsOnePage.tech', { returnObjects: true })
+      technologies: t('portfolio.projects.animalsOnePage.tech', { returnObjects: true }),
+      role: t('portfolio.projects.animalsOnePage.role', { defaultValue: 'Developer' }),
+      year: '2023',
+      caseStudyLink: t('portfolio.projects.animalsOnePage.case', { defaultValue: '' }) || null,
     }
-  ];
+  ]), [t, i18n.language]);
+
+  const allTech = useMemo(() => {
+    const set = new Set();
+    projects.forEach(p => (p.technologies || []).forEach(set.add, set));
+    return ['all', ...Array.from(set)];
+  }, [projects]);
+
+  const filtered = useMemo(() => {
+    if (activeFilter === 'all') return projects;
+    return projects.filter(p => p.technologies?.includes(activeFilter));
+  }, [projects, activeFilter]);
 
   return (
-    <div className="portfolio-container">
-      <div className="gradient-background"></div>
+    <div className="portfolio-container" id="portfolio">
+      <div className="gradient-background" aria-hidden="true"></div>
       <div className="content-wrapper">
         <header className="portfolio-header animate-fade-in">
           <h1 className="portfolio-title">{t('portfolio.title')}</h1>
@@ -45,36 +71,148 @@ const Portfolio = () => {
               }}
             />
           </p>
+
+          {/* Filtry technologii */}
+          <nav className="filters" aria-label={t('portfolio.filters.aria', { defaultValue: 'Filtruj projekty' })}>
+            {allTech.map(tag => (
+              <button
+                key={tag}
+                className={`filter-chip ${activeFilter === tag ? 'is-active' : ''}`}
+                onClick={() => setActiveFilter(tag)}
+                aria-pressed={activeFilter === tag}
+              >
+                {tag}
+              </button>
+            ))}
+          </nav>
         </header>
 
-        <section className="projects-grid">
-          {projects.map((project, index) => (
-            <div key={project.id} className={`project-card animate-slide-up delay-${index + 1}`}>
-              {project.image && (
-                <div className="project-image-wrapper">
-                  <img src={project.image} alt={project.title} className="project-image" />
+        <section className="projects-grid" aria-live="polite">
+          {isLoading
+            ? (
+              <>
+                <div className="project-card skeleton" aria-hidden="true">
+                  <div className="project-image-wrapper skeleton-box" />
+                  <div className="project-content">
+                    <div className="skeleton-line w-60" />
+                    <div className="skeleton-line w-40" />
+                    <div className="skeleton-line w-90" />
+                    <div className="skeleton-line w-70" />
+                    <div className="skeleton-badges" />
+                  </div>
                 </div>
-              )}
-              <div className="project-content">
-                <h3 className="project-heading">{project.title}</h3>
-                <h4 className="project-subtitle">{project.subtitle}</h4>
-                <p className="project-description">{project.description}</p>
-                <div className="project-tech-stack">
-                  {project.technologies?.map((tech) => (
-                    <span key={tech} className="tech-badge">{tech}</span>
-                  ))}
+                <div className="project-card skeleton" aria-hidden="true">
+                  <div className="project-image-wrapper skeleton-box" />
+                  <div className="project-content">
+                    <div className="skeleton-line w-60" />
+                    <div className="skeleton-line w-40" />
+                    <div className="skeleton-line w-90" />
+                    <div className="skeleton-line w-70" />
+                    <div className="skeleton-badges" />
+                  </div>
                 </div>
-                <div className="project-links">
-                  <a href={project.demoLink} target="_blank" rel="noopener noreferrer" className="project-link">
-                    <FaExternalLinkAlt /> {t('portfolio.actions.demo')}
-                  </a>
-                  <a href={project.githubLink} target="_blank" rel="noopener noreferrer" className="project-link">
-                    <FaGithub /> {t('portfolio.actions.code')}
-                  </a>
+              </>
+            )
+            : filtered.map((project, index) => (
+              <article
+                key={project.id}
+                className={`project-card animate-slide-up delay-${index + 1}`}
+                itemScope
+                itemType="https://schema.org/CreativeWork"
+              >
+                {project.image && (
+                  <div className="project-image-wrapper">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="project-image"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    <div className="image-overlay">
+                      <a
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="overlay-cta"
+                        aria-label={`${t('portfolio.actions.demo')} — ${project.title}`}
+                      >
+                        <FaExternalLinkAlt /> {t('portfolio.actions.demo')}
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                <div className="project-content">
+                  <header className="project-header">
+                    <h3 className="project-heading" itemProp="name">{project.title}</h3>
+                    <div className="project-meta">
+                      {project.subtitle && <span className="project-subtitle" itemProp="about">{project.subtitle}</span>}
+                      {(project.year || project.role) && (
+                        <span className="project-chipset">
+                          {project.year && <span className="chip">{project.year}</span>}
+                          {project.role && <span className="chip">{project.role}</span>}
+                        </span>
+                      )}
+                    </div>
+                  </header>
+
+                  <p className="project-description" itemProp="description">{project.description}</p>
+
+                  <div className="project-tech-stack" aria-label={t('portfolio.tech.aria', { defaultValue: 'Technologie' })}>
+                    {project.technologies?.map((tech) => (
+                      <button
+                        key={tech}
+                        className={`tech-badge ${activeFilter === tech ? 'is-active' : ''}`}
+                        onClick={() => setActiveFilter(tech)}
+                        aria-pressed={activeFilter === tech}
+                      >
+                        {tech}
+                      </button>
+                    ))}
+                  </div>
+
+                  <div className="project-links">
+                    <a
+                      href={project.demoLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      <FaExternalLinkAlt /> {t('portfolio.actions.demo')}
+                    </a>
+                    <a
+                      href={project.githubLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="project-link"
+                    >
+                      <FaGithub /> {t('portfolio.actions.code')}
+                    </a>
+                    {project.caseStudyLink && (
+                      <a
+                        href={project.caseStudyLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="project-link subtle"
+                      >
+                        {t('portfolio.actions.case', { defaultValue: 'Case study' })}
+                      </a>
+                    )}
+                  </div>
                 </div>
-              </div>
+              </article>
+            ))
+          }
+
+          {!isLoading && filtered.length === 0 && (
+            <div className="empty-state">
+              <p>{t('portfolio.empty', { defaultValue: 'Brak projektów dla wybranego filtra.' })}</p>
+              <button className="filter-chip" onClick={() => setActiveFilter('all')}>
+                {t('portfolio.actions.reset', { defaultValue: 'Resetuj filtr' })}
+              </button>
             </div>
-          ))}
+          )}
         </section>
       </div>
     </div>
@@ -82,3 +220,4 @@ const Portfolio = () => {
 };
 
 export default Portfolio;
+// ... existing code ...
