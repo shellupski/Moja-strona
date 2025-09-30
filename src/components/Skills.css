@@ -53,6 +53,17 @@
     margin-top: 10px;
     font-size: 0.95rem;
 }
+.skills__legend .legend-item{
+  display:flex;
+  gap: 6px;
+}
+.skills__legend dt,
+.skills__legend dd{
+  margin: 0;
+}
+.skills__legend dd{
+  color:#9fc2ff;
+}
 
 .skills__tabs{
     margin-top: 16px;

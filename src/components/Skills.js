@@ -37,9 +37,12 @@ const Skills = () => {
   const { t, i18n } = useTranslation();
   const isEN = i18n.language?.startsWith("en");
 
-  const LEVELS = useMemo(() => isEN
-    ? { Advanced: 80, Intermediate: 65, Basics: 45 }
-    : { Zaawansowany: 80, "Średniozaawansowany": 65, Podstawy: 45 }, [isEN]);
+  // Ujednolicone progi — muszą odpowiadać legendzie (~80 / ~65 / ~45)
+  const LEVELS = useMemo(() => (
+    isEN
+      ? { Advanced: 80, Intermediate: 65, Basics: 45 }
+      : { Zaawansowany: 80, "Średniozaawansowany": 65, Podstawy: 45 }
+  ), [isEN]);
 
   const GROUPS = useMemo(() => [
     {
@@ -152,11 +155,21 @@ const Skills = () => {
           </h2>
           <p className="skills__kicker">{t("skills.kicker")}</p>
 
-          <div className="skills__legend">
-            <span><b>{t("skills.legend.adv")}</b> {t("skills.legend.advPct")}</span>
-            <span><b>{t("skills.legend.mid")}</b> {t("skills.legend.midPct")}</span>
-            <span><b>{t("skills.legend.basic")}</b> {t("skills.legend.basicPct")}</span>
-          </div>
+          {/* Legenda: semantycznie i dostępnie, spójna z LEVELS */}
+          <dl className="skills__legend" aria-label={t("skills.legend.aria", { defaultValue: "Legenda poziomów umiejętności" })}>
+            <div className="legend-item">
+              <dt><b>{t("skills.legend.adv")}</b></dt>
+              <dd>~{LEVELS[isEN ? "Advanced" : "Zaawansowany"]}%</dd>
+            </div>
+            <div className="legend-item">
+              <dt><b>{t("skills.legend.mid")}</b></dt>
+              <dd>~{LEVELS[isEN ? "Intermediate" : "Średniozaawansowany"]}%</dd>
+            </div>
+            <div className="legend-item">
+              <dt><b>{t("skills.legend.basic")}</b></dt>
+              <dd>~{LEVELS[isEN ? "Basics" : "Podstawy"]}%</dd>
+            </div>
+          </dl>
 
           <div className="skills__tabs">
             <button
@@ -177,31 +190,16 @@ const Skills = () => {
           </div>
         </header>
 
-        {active === 'all'
-          ? GROUPS.map((group) => (
-              <section key={group.key} className="sk-group">
-                <h3 className="sk-group__title">{group.label}</h3>
-                <div className="sk-grid">
-                  {group.items.map((s) => (
-                    <SkillItem key={`${group.key}:${s.id ?? s.name ?? (s.Icon?.name || 'item')}`} {...s} />
-                  ))}
-                </div>
-              </section>
-            ))
-          : (() => {
-              const group = GROUPS.find((g) => g.key === active);
-              if (!group) return null;
-              return (
-                <section className="sk-group">
-                  <h3 className="sk-group__title">{group.label}</h3>
-                  <div className="sk-grid">
-                    {group.items.map((s) => (
-                      <SkillItem key={`${group.key}:${s.id ?? s.name ?? (s.Icon?.name || 'item')}`} {...s} />
-                    ))}
-                  </div>
-                </section>
-              );
-            })()}
+        {items.map((group) => (
+          <section key={group.key} className="sk-group">
+            <h3 className="sk-group__title">{group.label}</h3>
+            <div className="sk-grid">
+              {group.items.map((s) => (
+                <SkillItem key={`${group.key}:${s.id ?? s.name ?? (s.Icon?.name || 'item')}`} {...s} />
+              ))}
+            </div>
+          </section>
+        ))}
       </div>
     </section>
   );

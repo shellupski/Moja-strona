@@ -88,7 +88,8 @@
       "basic": "Podstawy",
       "advPct": "~80%",
       "midPct": "~65%",
-      "basicPct": "~45%"
+      "basicPct": "~45%",
+      "aria": "Legenda poziomów umiejętności"
     },
     "tabs": {
       "all": "Wszystko"
@@ -106,16 +107,16 @@
       "win": { "name": "Windows Server (AD, GPO)", "level": "Zaawansowany", "notes": "Administracja domeną, polityki GPO" },
       "linux": { "name": "Linux / Bash", "level": "Średniozaawansowany", "notes": "CLI, skrypty, podstawy automatyzacji" },
       "scripts": { "name": "Skrypty Bash / PowerShell", "level": "Średniozaawansowany" },
-      "hardening": { "name": "Backupy, monitoring, twardnienie", "level": "Średniozaawansowany" },
+      "hardening": { "name": "Kopie zapasowe, monitoring, wzmocnienie", "level": "Średniozaawansowany" },
 
-      "netProtocols": { "name": "TCP/IP, DNS, DHCP, VPN", "level": "Zaawansowany" },
+      "netProtocols": { "name": "TCP/IP, DNS, DHCP, VPN", "level": "Średniozaawansowany" },
       "netDevices": { "name": "Routery • Switche • Firewalle", "level": "Średniozaawansowany" },
 
       "mysql": { "name": "MySQL", "level": "Średniozaawansowany", "notes": "administracja, optymalizacja, kopie" },
       "postgres": { "name": "PostgreSQL", "level": "Podstawy" },
       "sql": { "name": "SQL (zapytania, optymalizacja)", "level": "Średniozaawansowany" },
 
-      "git": { "name": "Git (GitHub/GitLab)", "level": "Zaawansowany" },
+      "git": { "name": "Git (GitHub/GitLab)", "level": "Średniozaawansowany" },
       "cicd": { "name": "CI/CD (GitHub Actions)", "level": "Podstawy" },
       "docker": { "name": "Docker", "level": "Podstawy" },
       "cloud": { "name": "Chmura: AWS / Azure / GCP", "level": "Podstawy" },
