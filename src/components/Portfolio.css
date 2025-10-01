@@ -478,3 +478,8 @@
     /* subtelniejszy efekt – bez powiększania */
     opacity: 0.96;
 }
+/* Ukryj pasek filtrów (gdyby w DOM pozostał fragment) */
+.filters{ display:none !important; }
+
+/* (opcjonalnie) dezaktywuj styl „is-active” na tech-badge, bo nie filtrujemy */
+.tech-badge.is-active{ background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.12); }
