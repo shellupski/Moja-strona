@@ -86,9 +86,9 @@
       "adv": "Zaawansowany",
       "mid": "Średniozaawansowany",
       "basic": "Podstawy",
-      "advPct": "~80%",
-      "midPct": "~65%",
-      "basicPct": "~45%",
+      "advPct": "~70%",
+      "midPct": "~55%",
+      "basicPct": "~40%",
       "aria": "Legenda poziomów umiejętności"
     },
     "tabs": {
@@ -107,7 +107,7 @@
       "win": { "name": "Windows Server (AD, GPO)", "level": "Zaawansowany", "notes": "Administracja domeną, polityki GPO" },
       "linux": { "name": "Linux / Bash", "level": "Średniozaawansowany", "notes": "CLI, skrypty, podstawy automatyzacji" },
       "scripts": { "name": "Skrypty Bash / PowerShell", "level": "Średniozaawansowany" },
-      "hardening": { "name": "Kopie zapasowe, monitoring, wzmocnienie", "level": "Średniozaawansowany" },
+      "hardening": { "name": "Kopie zapasowe i monitoring", "level": "Średniozaawansowany" },
 
       "netProtocols": { "name": "TCP/IP, DNS, DHCP, VPN", "level": "Średniozaawansowany" },
       "netDevices": { "name": "Routery • Switche • Firewalle", "level": "Średniozaawansowany" },
@@ -165,7 +165,7 @@
     "jobs": {
       "streetcom": {
         "where": "Streetcom • Administrator Systemów IT & Developer Platform",
-        "date": "07.2024 – obecnie",
+        "date": "02.2024 – 08.2025",
         "loc": "Warszawa / zdalnie",
         "bullets": [
           "Kompleksowa obsługa IT, administracja systemami i bazami danych, modernizacja i usprawnienia.",

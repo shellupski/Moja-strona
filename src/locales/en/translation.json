@@ -84,13 +84,13 @@
     "kicker": "Stability • Automation • Support • Development",
     "jobs": {
       "streetcom": {
-        "where": "Streetcom • IT Systems Administrator & Developer Platform",
-        "date": "07.2024 – present",
-        "loc": "Warsaw / remote",
+        "where": "Streetcom • Administrator Systemów IT & Developer Platform",
+        "date": "02.2024 – 08.2025",
+        "loc": "Warszawa / zdalnie",
         "bullets": [
-          "Comprehensive IT support, systems and databases administration, modernization and improvements.",
-          "Troubleshooting functional issues, improving reliability and user experience.",
-          "Participation in automation and process optimization initiatives."
+          "Kompleksowa obsługa IT, administracja systemami i bazami danych, modernizacja i usprawnienia.",
+          "Rozwiązywanie problemów funkcjonalnych, poprawa niezawodności i doświadczeń użytkowników.",
+          "Udział w inicjatywach dot. automatyzacji i optymalizacji procesów."
         ],
         "tags": {
           "servers": "Windows/Linux",
@@ -186,9 +186,10 @@
       "adv": "Advanced",
       "mid": "Intermediate",
       "basic": "Basics",
-      "advPct": "~80%",
-      "midPct": "~65%",
-      "basicPct": "~45%"
+      "advPct": "~70%",
+      "midPct": "~55%",
+      "basicPct": "~40%",
+      "aria": "Skill levels legend"
     },
     "tabs": {
       "all": "All"
@@ -206,7 +207,7 @@
       "win": { "name": "Windows Server (AD, GPO)", "level": "Advanced", "notes": "Domain admin, GPO policies" },
       "linux": { "name": "Linux / Bash", "level": "Intermediate", "notes": "CLI, scripts, basic automation" },
       "scripts": { "name": "Bash / PowerShell scripts", "level": "Intermediate" },
-      "hardening": { "name": "Backups, monitoring, hardening", "level": "Intermediate" },
+      "hardening": { "name": "Backups and monitoring", "level": "Intermediate" },
 
       "netProtocols": { "name": "TCP/IP, DNS, DHCP, VPN", "level": "Advanced" },
       "netDevices": { "name": "Routers • Switches • Firewalls", "level": "Intermediate" },
